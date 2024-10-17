@@ -1,3 +1,32 @@
+# **Button**
+Trong Android Studio, các sự kiện cơ bản mà bạn có thể bắt cho một **Button** bao gồm các sự kiện liên quan đến tương tác của người dùng như nhấn, giữ, hoặc thả. Dưới đây là một số sự kiện cơ bản mà bạn có thể bắt cho **Button** và ý nghĩa của chúng:
+
+### 1. **onClick**
+   - **Mô tả**: Đây là sự kiện phổ biến nhất khi người dùng nhấn vào một Button. Khi sự kiện này được kích hoạt, một hành động cụ thể sẽ được thực thi.
+   - **Ứng dụng**: Sử dụng khi bạn muốn thực hiện một hành động ngay lập tức khi người dùng nhấn vào Button, ví dụ: chuyển sang một màn hình khác hoặc gửi dữ liệu.
+
+### 2. **onLongClick**
+   - **Mô tả**: Được kích hoạt khi người dùng giữ lâu hơn một khoảng thời gian nhất định trên Button (thường khoảng 0.5-1 giây).
+   - **Ứng dụng**: Thường sử dụng để thực hiện các hành động bổ sung hoặc hiển thị thêm tùy chọn, tương tự như việc nhấn chuột phải trên máy tính.
+
+### 3. **onTouch**
+   - **Mô tả**: Sự kiện này được kích hoạt bất kỳ khi nào người dùng chạm vào Button, kể cả việc nhấn và thả (bao gồm cả các chuyển động phức tạp hơn như vuốt).
+   - **Ứng dụng**: Sử dụng khi bạn cần bắt các thao tác tinh tế hơn như theo dõi vị trí ngón tay của người dùng hoặc phân biệt giữa các kiểu thao tác (vuốt, nhấn, giữ).
+
+### 4. **onFocusChange**
+   - **Mô tả**: Sự kiện này được kích hoạt khi Button nhận hoặc mất **focus** (sự chú ý) từ người dùng, thường khi chuyển giữa các thành phần trong giao diện bằng bàn phím hoặc phím điều hướng.
+   - **Ứng dụng**: Dùng để thay đổi giao diện Button khi nó được chọn hoặc hủy chọn (chẳng hạn thay đổi màu sắc, kích thước, hoặc kiểu dáng khi focus).
+
+### 5. **onKey**
+   - **Mô tả**: Được kích hoạt khi có một sự kiện phím xảy ra khi Button đang có **focus**.
+   - **Ứng dụng**: Sử dụng để xử lý các sự kiện phím như khi người dùng nhấn một phím cụ thể trên bàn phím hoặc điều khiển từ xa khi Button đang được focus.
+
+### 6. **onHover**
+   - **Mô tả**: Được kích hoạt khi người dùng di chuyển con trỏ chuột qua Button, sự kiện này thường được sử dụng cho các thiết bị có hỗ trợ chuột.
+   - **Ứng dụng**: Thường ít sử dụng trên các thiết bị di động, nhưng có thể hữu ích trên các thiết bị có hỗ trợ chuột hoặc bút stylus.
+
+Những sự kiện này cung cấp các cách khác nhau để tương tác với Button, và bạn có thể kết hợp chúng để mang lại trải nghiệm người dùng phong phú hơn cho ứng dụng.
+
 Trong Android Studio, **Bottom Navigation** (hay **Bottom Navigation View**) là một thanh điều hướng nằm ở dưới cùng của màn hình, cho phép người dùng chuyển đổi giữa các màn hình hoặc phần chính của ứng dụng. Để bắt sự kiện cho **Bottom Navigation**, bạn có thể sử dụng các sự kiện chính sau:
 
 ### 1. **onNavigationItemSelected**:
