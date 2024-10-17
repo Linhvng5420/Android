@@ -1,26 +1,26 @@
 # **Bắt sự kiện phổ biến**
 Trong Android Studio, ngoài Button, các thành phần giao diện khác cũng có thể bắt nhiều loại sự kiện. Dưới đây là các kiểu bắt sự kiện phổ biến cho các thành phần khác nhau trong giao diện Android:
 
- 1. **EditText (Trường nhập liệu văn bản)**:
+1. **EditText (Trường nhập liệu văn bản)**:
    - **onTextChanged**: Được kích hoạt khi có sự thay đổi trong nội dung văn bản.
    - **beforeTextChanged**: Được kích hoạt ngay trước khi nội dung văn bản thay đổi.
    - **afterTextChanged**: Được kích hoạt ngay sau khi nội dung văn bản thay đổi.
    - **onFocusChange**: Kích hoạt khi thành phần nhận hoặc mất focus.
    - **onEditorAction**: Được kích hoạt khi người dùng nhấn nút **"Done"** hoặc **"Enter"** trên bàn phím.
 
- 2. **CheckBox (Hộp kiểm)**:
+2. **CheckBox (Hộp kiểm)**:
    - **onCheckedChanged**: Kích hoạt khi trạng thái của CheckBox thay đổi (được chọn hoặc bỏ chọn).
    - **onClick**: Kích hoạt khi người dùng nhấn vào CheckBox.
 
- 3. **RadioButton (Nút chọn)**:
+3. **RadioButton (Nút chọn)**:
    - **onCheckedChanged**: Được kích hoạt khi RadioButton được chọn hoặc bỏ chọn.
    - **onClick**: Kích hoạt khi người dùng nhấn vào RadioButton.
 
- 4. **Spinner (Trình thả xuống)**:
+4. **Spinner (Trình thả xuống)**:
    - **onItemSelected**: Kích hoạt khi một mục trong Spinner được chọn.
    - **onNothingSelected**: Kích hoạt khi không có mục nào trong Spinner được chọn.
 
- 5. **SeekBar (Thanh trượt)**:
+5. **SeekBar (Thanh trượt)**:
    - **onProgressChanged**: Được kích hoạt khi giá trị của SeekBar thay đổi.
    - **onStartTrackingTouch**: Kích hoạt khi người dùng bắt đầu tương tác với SeekBar (bắt đầu kéo).
    - **onStopTrackingTouch**: Kích hoạt khi người dùng kết thúc tương tác với SeekBar (thả ra).
