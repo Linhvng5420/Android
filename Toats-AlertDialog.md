@@ -1,8 +1,8 @@
-# **TOAST**
-## Để hiển thị thông báo trong ứng dụng Android, `Toast`.
+## ```TOAST```
+**Để hiển thị thông báo trong ứng dụng Android, `Toast`.**
 `Toast` trong Android là một thành phần hiển thị thông báo tạm thời cho người dùng. Dưới đây là các kiểu và tùy chọn mà bạn có thể sử dụng với `Toast`:
 
-### 1. **Cách Tạo Toast Cơ Bản**
+**1. Cách Tạo Toast Cơ Bản**
 
 ```java
 Toast.makeText(context, "Nội dung thông báo", Toast.LENGTH_SHORT).show();
@@ -12,12 +12,12 @@ Toast.makeText(context, "Nội dung thông báo", Toast.LENGTH_SHORT).show();
 - **Nội dung thông báo**: Văn bản bạn muốn hiển thị.
 - **Độ dài**: `Toast.LENGTH_SHORT` hoặc `Toast.LENGTH_LONG`.
 
-### 2. **Độ Dài Hiển Thị**
+**2. Độ Dài Hiển Thị**
 
 - `Toast.LENGTH_SHORT`: Hiển thị trong khoảng 2 giây.
 - `Toast.LENGTH_LONG`: Hiển thị trong khoảng 3.5 giây.
 
-### 3. **Tùy Chỉnh Vị Trí**
+**3. Tùy Chỉnh Vị Trí**
 
 Mặc định, `Toast` sẽ hiển thị ở giữa màn hình. Bạn có thể thay đổi vị trí của nó bằng cách sử dụng `setGravity()`:
 
@@ -37,7 +37,7 @@ toast.show();
 - `Gravity.CENTER_HORIZONTAL`: Hiển thị ở giữa theo chiều ngang.
 - `Gravity.CENTER_VERTICAL`: Hiển thị ở giữa theo chiều dọc.
 
-### 4. **Tùy Chỉnh Hình Dáng và Nội Dung**
+**4. Tùy Chỉnh Hình Dáng và Nội Dung**
 
 Bạn có thể tạo một `Toast` tùy chỉnh bằng cách sử dụng layout XML. Dưới đây là cách làm:
 
@@ -81,18 +81,17 @@ customToast.setDuration(Toast.LENGTH_LONG);
 customToast.setView(customView);
 customToast.show();
 ```
-
-### 5. **Một Số Lưu Ý**
+**5. Một Số Lưu Ý**
 
 - **Tránh hiển thị quá nhiều `Toast` cùng lúc**: Điều này có thể làm phiền người dùng. Hãy chỉ hiển thị `Toast` khi cần thiết.
 - **Không nên sử dụng `Toast` cho thông báo quan trọng**: Nếu bạn cần hiển thị thông báo mà người dùng phải chú ý (ví dụ: lỗi quan trọng), hãy sử dụng `Dialog` hoặc `Snackbar` thay vì `Toast`.
 
-### Kết Luận
+  Kết Luận
 
 `Toast` là một cách đơn giản và nhanh chóng để thông báo cho người dùng về các sự kiện trong ứng dụng. Tùy thuộc vào nhu cầu của bạn, bạn có thể tùy chỉnh nó để phù hợp với trải nghiệm người dùng của ứng dụng của bạn.
 
 ## Các Kiểu Toats Khác
-### 1. **Snackbar**
+  1. **Snackbar**
 `Snackbar` là một thành phần UI hiển thị thông báo ở đáy màn hình, thường được sử dụng cho các hành động tạm thời. Nó có thể bao gồm một hành động (như "Hoàn tác").
 
 ```java
@@ -104,7 +103,7 @@ Snackbar.make(view, "Đã lưu thành công!", Snackbar.LENGTH_SHORT)
     .show();
 ```
 
-### 2. **Dialog**
+  2. **Dialog**
 Sử dụng một `Dialog` để hiển thị thông báo. Dialog có thể chứa nhiều thông tin hơn và có thể bao gồm nhiều nút tùy chọn.
 
 ```java
@@ -115,7 +114,7 @@ new AlertDialog.Builder(getContext())
     .show();
 ```
 
-### 3. **ProgressDialog**
+  3. **ProgressDialog**
 `ProgressDialog` được sử dụng để hiển thị trạng thái tiến trình trong một tác vụ dài. Tuy nhiên, lưu ý rằng `ProgressDialog` đã bị khuyến cáo không sử dụng vì nó có thể gây mất trải nghiệm người dùng. Thay vào đó, bạn nên sử dụng `ProgressBar` trong UI.
 
 ```java
@@ -128,7 +127,7 @@ progressDialog.show();
 progressDialog.dismiss();
 ```
 
-### 4. **Custom Toast**
+  4. **Custom Toast**
 Bạn cũng có thể tạo một `Toast` tùy chỉnh bằng cách sử dụng một layout riêng cho nó.
 
 ```java
@@ -144,7 +143,7 @@ toast.setView(layout);
 toast.show();
 ```
 
-### 5. **Notification**
+  5. **Notification**
 Nếu bạn muốn gửi thông báo cho người dùng ngay cả khi ứng dụng không hoạt động, bạn có thể sử dụng `Notification`.
 
 ```java
@@ -160,12 +159,13 @@ NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext()
 notificationManager.notify(1, builder.build());
 ```
 
-### Kết Luận
+  Kết Luận
 Tùy vào ngữ cảnh và cách bạn muốn người dùng tương tác, bạn có thể chọn một trong những phương pháp trên để thông báo cho người dùng. Nếu bạn cần một thông báo tạm thời, hãy sử dụng `Snackbar` hoặc `Toast`. Nếu bạn cần một thông báo cần sự chú ý hơn, hãy sử dụng `Dialog` hoặc `Notification`.
 
-# Trong Android, `AlertDialog` hiển thị thông tin và tương tác với người dùng.
+## `AlertDialog` 
+*hiển thị thông tin và tương tác với người dùng.*
 
-### 1. **AlertDialog Cơ Bản**
+  1. **AlertDialog Cơ Bản**
 
 Đây là kiểu đơn giản nhất, thường chỉ bao gồm tiêu đề, thông điệp và các nút xác nhận.
 
@@ -180,7 +180,7 @@ new AlertDialog.Builder(context)
     .show();
 ```
 
-### 2. **AlertDialog với Danh Sách (List)**
+  2. **AlertDialog với Danh Sách (List)**
 
 Được sử dụng khi bạn muốn hiển thị một danh sách các tùy chọn cho người dùng chọn.
 
@@ -194,7 +194,7 @@ new AlertDialog.Builder(context)
     .show();
 ```
 
-### 3. **AlertDialog với Danh Sách Có Checkbox (Multi-choice List)**
+  3. **AlertDialog với Danh Sách Có Checkbox (Multi-choice List)**
 
 Sử dụng khi bạn muốn người dùng có thể chọn nhiều tùy chọn từ danh sách.
 
@@ -212,7 +212,7 @@ new AlertDialog.Builder(context)
     .show();
 ```
 
-### 4. **AlertDialog với View Tùy Chỉnh**
+  4. **AlertDialog với View Tùy Chỉnh**
 
 Bạn có thể tạo một `AlertDialog` với một layout tùy chỉnh, cho phép bạn thêm các thành phần như `EditText`, `CheckBox`, v.v.
 
@@ -232,7 +232,7 @@ new AlertDialog.Builder(context)
     .show();
 ```
 
-### 5. **AlertDialog với Icon**
+  5. **AlertDialog với Icon**
 
 Bạn có thể thêm biểu tượng cho `AlertDialog` để làm nổi bật hơn.
 
@@ -245,7 +245,7 @@ new AlertDialog.Builder(context)
     .show();
 ```
 
-### 6. **AlertDialog với Progress Bar**
+  6. **AlertDialog với Progress Bar**
 
 Bạn có thể hiển thị một hộp thoại với một thanh tiến trình để thể hiện rằng một quá trình nào đó đang diễn ra.
 
@@ -257,6 +257,6 @@ AlertDialog progressDialog = new AlertDialog.Builder(context)
     .show();
 ```
 
-### Kết Luận
+  Kết Luận
 
 `AlertDialog` là một công cụ mạnh mẽ để tương tác với người dùng trong ứng dụng Android. Bạn có thể kết hợp các kiểu này để tạo ra trải nghiệm người dùng tốt hơn, dựa trên nhu cầu cụ thể của ứng dụng của bạn.
