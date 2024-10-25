@@ -268,7 +268,8 @@ Dưới đây là tổng hợp kiến thức từ cơ bản đến nâng cao li�
             ownerNhanvienBinding.searchView.clearFocus(); // Xóa focus để tắt con trỏ trong SearchView
             return false;
         });
-    }```
+    }
+    ```
 
    - **Back Stack và Fragment**:
      - Quản lý `Back Stack` của `Fragment` khi người dùng điều hướng qua các màn hình khác nhau trong ứng dụng.
