@@ -125,5 +125,5 @@ counterRef.runTransaction(new Transaction.Handler() {
 3. **Sử dụng transaction với bộ đếm toàn cục**:
    - Nếu bộ đếm hiện là 15, mã mới sẽ là: `nv016`.
 4. **Dãy tự động dài và xấu**
-Thêm nhân viên vào Firebase với mã ngẫu nhiên (Dài và xấu)
-databaseReference.push().setValue(nhanVien);
+```Thêm nhân viên vào Firebase với mã ngẫu nhiên (Dài và xấu)
+databaseReference.push().setValue(nhanVien);```
