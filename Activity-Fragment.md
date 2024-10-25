@@ -222,6 +222,55 @@ Dưới đây là tổng hợp kiến thức từ cơ bản đến nâng cao li�
      }
      ```
 
+     ```
+     @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Khởi tạo View Binding cho Fragment và liên kết với layout fragment_owner_nhanvien.xml
+        ownerNhanvienBinding = FragmentOwnerNhanvienBinding.inflate(inflater, container, false);
+
+        // Trả về đối tượng View được tạo từ binding, đây là root view của Fragment
+        return ownerNhanvienBinding.getRoot();
+    }
+
+    // TODO: HÀM XỬ LÝ CHỨC NĂNG CỦA VIEW APP
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Nhận emailUser từ Bundle
+        if (getArguments() != null) {
+            emailUser = getArguments().getString("emailUser");
+            Log.d("l.e", "onViewCreated: emailUser = " + emailUser);
+        } else Log.d("l.e", "Nhận emailUser từ Bundle: getArguments() = null");
+
+        //RecycleView: Thiết lập layout cho RecyclerView, sử dụng LinearLayoutManager để hiển thị danh sách theo chiều dọc
+        ownerNhanvienBinding.ownerRcvNhanVien.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Khởi tạo danh sách nhân viên trống và adapter
+        List<NhanVien> nhanVienList = new ArrayList<>();
+        nhanVienAdapter = new NhanVienAdapter(nhanVienList);
+        ownerNhanvienBinding.ownerRcvNhanVien.setAdapter(nhanVienAdapter);
+
+        // Firebase: lấy dữ liệu từ Firebase
+        getNhanVienData();
+
+        //nhấn vào recycleview nhân viên
+        nhanVaoItemNhanVien();
+
+        // nhấn nút thêm nhân viên
+        nhanNutThemNhanVien();
+
+        // Thiết lập tìm kiếm
+        timKiemNhanVien();
+        // Lắng nghe sự kiện nhấn ra ngoài thanh tìm kiếm để tắt con trỏ và ẩn bàn phím
+        ownerNhanvienBinding.getRoot().setOnTouchListener((v, event) -> {
+            hideKeyboard(v); // Ẩn bàn phím
+            ownerNhanvienBinding.searchView.clearFocus(); // Xóa focus để tắt con trỏ trong SearchView
+            return false;
+        });
+    }
+     ```
+
    - **Back Stack và Fragment**:
      - Quản lý `Back Stack` của `Fragment` khi người dùng điều hướng qua các màn hình khác nhau trong ứng dụng.
 
