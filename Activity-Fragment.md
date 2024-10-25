@@ -210,7 +210,7 @@ Dưới đây là tổng hợp kiến thức từ cơ bản đến nâng cao li�
 
    - **Giao tiếp giữa Fragment và Activity**:
      - Sử dụng interface để giao tiếp giữa `Fragment` và `Activity`.
-     ```java
+```java
      public interface OnFragmentInteractionListener {
          void onFragmentInteraction(String data);
      }
@@ -220,9 +220,9 @@ Dưới đây là tổng hợp kiến thức từ cơ bản đến nâng cao li�
      public void onFragmentInteraction(String data) {
          // Xử lý dữ liệu từ Fragment
      }
-     ```
+```
 
-     ```java
+```java
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -269,7 +269,8 @@ Dưới đây là tổng hợp kiến thức từ cơ bản đến nâng cao li�
             return false;
         });
     }
-    ```
+
+```
 
    - **Back Stack và Fragment**:
      - Quản lý `Back Stack` của `Fragment` khi người dùng điều hướng qua các màn hình khác nhau trong ứng dụng.
