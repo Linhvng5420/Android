@@ -222,8 +222,8 @@ Dưới đây là tổng hợp kiến thức từ cơ bản đến nâng cao li�
      }
      ```
 
-     ```
-     @Nullable
+     ```java
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Khởi tạo View Binding cho Fragment và liên kết với layout fragment_owner_nhanvien.xml
