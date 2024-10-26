@@ -216,79 +216,121 @@ Sơ đồ vòng đời của `Fragment` chia thành các trạng thái chính sa
 
 ### 3. Minh họa qua ví dụ
 
-```kotlin
-class SampleFragment : Fragment() {
+Dưới đây là ví dụ về vòng đời của `Fragment` bằng Java, hiển thị các phương thức chính và cách `Log` từng giai đoạn để thấy rõ thứ tự thực thi.
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("FragmentLifecycle", "onAttach")
+### Ví dụ minh họa vòng đời của Fragment bằng Java
+
+```java
+package com.example.myapp;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+public class SampleFragment extends Fragment {
+
+    private static final String TAG = "FragmentLifecycle";
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "onAttach");
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("FragmentLifecycle", "onCreate")
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d("FragmentLifecycle", "onCreateView")
-        return inflater.inflate(R.layout.fragment_sample, container, false)
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView");
+        return inflater.inflate(R.layout.fragment_sample, container, false);
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("FragmentLifecycle", "onViewCreated")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated");
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.d("FragmentLifecycle", "onActivityCreated")
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated");
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("FragmentLifecycle", "onStart")
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("FragmentLifecycle", "onResume")
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("FragmentLifecycle", "onPause")
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d("FragmentLifecycle", "onStop")
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop");
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("FragmentLifecycle", "onDestroyView")
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView");
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("FragmentLifecycle", "onDestroy")
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("FragmentLifecycle", "onDetach")
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "onDetach");
     }
 }
 ```
 
-Kết quả `Logcat` sẽ cho thấy thứ tự các phương thức trong vòng đời của `Fragment`.
+### Giải thích từng phương thức
 
-### Tóm tắt
+1. **onAttach**: Gọi khi `Fragment` được gắn vào `Activity`.
+2. **onCreate**: Được gọi khi `Fragment` được tạo ra để khởi tạo các thành phần không liên quan đến giao diện.
+3. **onCreateView**: Tạo và trả về `View` của `Fragment`. Đây là nơi khai báo layout cho `Fragment`.
+4. **onViewCreated**: Được gọi ngay sau `onCreateView`, thích hợp để thiết lập các thành phần UI cụ thể.
+5. **onActivityCreated**: Được gọi khi `Activity` chứa `Fragment` đã hoàn tất `onCreate`. Có thể truy cập các thành phần từ `Activity` ở đây.
+6. **onStart**: Được gọi khi `Fragment` trở nên hiển thị với người dùng.
+7. **onResume**: Được gọi khi `Fragment` ở trạng thái tương tác với người dùng.
+8. **onPause**: Được gọi khi `Fragment` không còn tương tác với người dùng.
+9. **onStop**: Được gọi khi `Fragment` không còn hiển thị.
+10. **onDestroyView**: Gọi khi `View` của `Fragment` bị hủy, giúp giải phóng tài nguyên của `View`.
+11. **onDestroy**: Được gọi khi `Fragment` sắp bị hủy hoàn toàn.
+12. **onDetach**: Được gọi khi `Fragment` bị tách khỏi `Activity`.
 
-Hiểu rõ vòng đời `Fragment` sẽ giúp quản lý tài nguyên tốt hơn và tránh các lỗi về giao diện hoặc dữ liệu khi `Fragment` bị tạo lại hoặc hủy.
+### Kết quả trong Logcat
+
+Các `Log.d` trong mỗi phương thức sẽ giúp bạn thấy được thứ tự chính xác khi các phương thức này được gọi trong vòng đời của `Fragment`.
 
 **Gợi ý khác:**
 
