@@ -220,98 +220,99 @@ Dưới đây là ví dụ về vòng đời của `Fragment` bằng Java, hiể
 
 ### Ví dụ minh họa vòng đời của Fragment bằng Java
 
+Dưới đây là minh họa bằng Java cho các phương thức `onCreate()`, `onCreateView()`, và `onViewCreated()` trong `Fragment`. Mỗi phương thức này có vai trò và vị trí trong vòng đời của `Fragment`, đảm bảo Fragment được khởi tạo và hiển thị đúng cách.
+
+### 1. Các phương thức và sự khác biệt
+
+- **onCreate()**:
+  - Được gọi khi `Fragment` được khởi tạo lần đầu.
+  - Chủ yếu dùng để khởi tạo các thành phần không liên quan đến giao diện, như dữ liệu hoặc các biến toàn cục.
+  
+- **onCreateView()**:
+  - Được gọi ngay sau `onCreate()`, dùng để khởi tạo giao diện (View) của `Fragment`.
+  - Trả về một `View` cho `Fragment` và có thể sử dụng `LayoutInflater` để kết nối với file layout XML.
+
+- **onViewCreated()**:
+  - Được gọi ngay sau khi `onCreateView()` hoàn tất.
+  - Phương thức này cho phép bạn thực hiện các thao tác trên `View` đã tạo, như thiết lập sự kiện cho các nút bấm hoặc khởi tạo các thành phần UI bên trong `Fragment`.
+
+### 2. Ví dụ minh họa
+
+Dưới đây là ví dụ về một `Fragment` trong Java để minh họa từng phương thức:
+
 ```java
-package com.example.myapp;
-
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.util.Log;
 
 public class SampleFragment extends Fragment {
 
-    private static final String TAG = "FragmentLifecycle";
+    // Biến toàn cục
+    private String data;
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach");
-    }
-
+    // Được gọi khi Fragment được tạo ra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate");
+        Log.d("FragmentLifecycle", "onCreate: Fragment is being created");
+
+        // Khởi tạo biến dữ liệu hoặc các thành phần không giao diện
+        data = "Dữ liệu được khởi tạo trong onCreate";
     }
 
-    @Nullable
+    // Được gọi để tạo View cho Fragment
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView");
+    public View onCreateView(@NonNull LayoutInflater inflater, 
+                             @Nullable ViewGroup container, 
+                             @Nullable Bundle savedInstanceState) {
+        Log.d("FragmentLifecycle", "onCreateView: Inflating layout for Fragment");
+
+        // Liên kết với layout fragment_sample.xml
         return inflater.inflate(R.layout.fragment_sample, container, false);
     }
 
+    // Được gọi sau khi View đã được tạo xong
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG, "onViewCreated");
-    }
+        Log.d("FragmentLifecycle", "onViewCreated: View created, initializing UI components");
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach");
+        // Khởi tạo hoặc thiết lập các thành phần giao diện
+        // Ví dụ: tìm một TextView trong layout và thiết lập dữ liệu
+        TextView textView = view.findViewById(R.id.textView);
+        textView.setText(data);
     }
 }
 ```
+
+#### Giải thích chi tiết từng phần
+
+1. **onCreate()**:
+   - Khởi tạo biến `data` với nội dung "Dữ liệu được khởi tạo trong onCreate".
+   - Dữ liệu này sẽ được sử dụng trong `Fragment`, nhưng không liên quan đến việc hiển thị giao diện.
+
+2. **onCreateView()**:
+   - Được gọi để tạo giao diện cho `Fragment`.
+   - Trong phương thức này, `LayoutInflater` được sử dụng để liên kết `Fragment` với layout `fragment_sample.xml`.
+   - Phương thức trả về `View` này sẽ được hiển thị cho người dùng.
+
+3. **onViewCreated()**:
+   - Được gọi sau khi `View` được tạo xong trong `onCreateView()`.
+   - Tại đây, bạn có thể truy cập các thành phần của `View` vừa được tạo (như `TextView`) và khởi tạo các thành phần UI hoặc thiết lập sự kiện.
+   - Trong ví dụ trên, `TextView` được tìm và thiết lập nội dung bằng biến `data` từ `onCreate()`.
+
+### Tóm tắt sự khác biệt
+
+- **onCreate()**: Dùng để khởi tạo các thành phần không giao diện.
+- **onCreateView()**: Dùng để tạo và trả về `View` cho `Fragment`.
+- **onViewCreated()**: Dùng để thao tác với các thành phần của `View` sau khi đã được tạo xong.
+
+Hiểu rõ sự khác biệt này giúp tối ưu hóa cách quản lý vòng đời và hiệu suất khi làm việc với `Fragment`.
 
 ### Giải thích từng phương thức
 
