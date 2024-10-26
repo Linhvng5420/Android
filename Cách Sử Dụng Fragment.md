@@ -1,3 +1,4 @@
+# I - Cơ Bản
 Fragment là một phần tử giao diện trong Android dùng để xây dựng giao diện linh hoạt và có thể tái sử dụng trong nhiều hoạt động khác nhau. Dưới đây là các bước hướng dẫn cách sử dụng Fragment trong Android Studio với Java.
 
 ### 1. **Tạo Fragment mới**
@@ -133,6 +134,121 @@ Fragment là một phần tử giao diện trong Android dùng để xây dựng
          return view;
      }
      ```
+
+# II - Vòng đời `Fragment`
+Vòng đời của `Fragment` trong Android khá phức tạp, bao gồm nhiều trạng thái khác nhau. Dưới đây là các phương thức chính trong vòng đời của `Fragment`, từ khi được tạo cho đến khi bị hủy:
+
+### 1. Các phương thức vòng đời chính
+
+1. **onAttach(Context context)**: Được gọi khi `Fragment` được gắn vào `Activity`. Ở đây, `Fragment` có thể truy cập vào `Context` của `Activity` mà nó gắn vào.
+
+2. **onCreate(Bundle savedInstanceState)**: Được gọi khi `Fragment` được tạo ra. Sử dụng để khởi tạo các thành phần không liên quan đến giao diện, chẳng hạn như các biến cần lưu trữ.
+
+3. **onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)**: Phương thức này tạo và trả về `View` của `Fragment`. Đây là nơi để bạn gán layout cho `Fragment`.
+
+4. **onViewCreated(View view, Bundle savedInstanceState)**: Được gọi ngay sau `onCreateView()`, nơi này bạn nên thiết lập các `View` cụ thể hoặc sự kiện trên các `View`.
+
+5. **onActivityCreated(Bundle savedInstanceState)**: Được gọi khi `Activity` chứa `Fragment` đã hoàn tất `onCreate()`. Đây là nơi bạn có thể tương tác với `Activity` hoặc truy cập các thành phần của nó.
+
+6. **onStart()**: Được gọi khi `Fragment` có thể nhìn thấy người dùng.
+
+7. **onResume()**: Được gọi khi `Fragment` đã ở trạng thái có thể tương tác với người dùng, như đang hiển thị trên màn hình.
+
+8. **onPause()**: Được gọi khi `Fragment` không còn tương tác với người dùng (ví dụ khi Activity bị tạm dừng hoặc `Fragment` khác được đưa lên trước).
+
+9. **onStop()**: Được gọi khi `Fragment` không còn hiển thị với người dùng.
+
+10. **onDestroyView()**: Được gọi khi `View` của `Fragment` bị hủy. Thường sử dụng để giải phóng tài nguyên liên quan đến `View`.
+
+11. **onDestroy()**: Được gọi khi `Fragment` chuẩn bị bị hủy hoàn toàn. Tại đây, bạn nên giải phóng tất cả tài nguyên còn lại của `Fragment`.
+
+12. **onDetach()**: Được gọi khi `Fragment` được tách ra khỏi `Activity`. Sau khi phương thức này được gọi, `Fragment` không còn liên kết với `Activity`.
+
+### 2. Vòng đời cơ bản của Fragment
+
+Sơ đồ vòng đời của `Fragment` chia thành các trạng thái chính sau đây:
+
+- **Tạo (Created)**: Từ `onAttach()` đến `onActivityCreated()`.
+- **Hoạt động (Active)**: Từ `onStart()` đến `onResume()`.
+- **Bị ẩn/tạm dừng (Paused)**: Khi `Fragment` chuyển sang `onPause()`.
+- **Ngừng hoạt động (Stopped)**: Từ `onStop()` cho đến `onDestroyView()`.
+- **Bị hủy (Destroyed)**: Từ `onDestroy()` đến `onDetach()`.
+
+### 3. Minh họa qua ví dụ
+
+```kotlin
+class SampleFragment : Fragment() {
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d("FragmentLifecycle", "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("FragmentLifecycle", "onCreate")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d("FragmentLifecycle", "onCreateView")
+        return inflater.inflate(R.layout.fragment_sample, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("FragmentLifecycle", "onViewCreated")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.d("FragmentLifecycle", "onActivityCreated")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("FragmentLifecycle", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("FragmentLifecycle", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("FragmentLifecycle", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("FragmentLifecycle", "onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("FragmentLifecycle", "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("FragmentLifecycle", "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("FragmentLifecycle", "onDetach")
+    }
+}
+```
+
+Kết quả `Logcat` sẽ cho thấy thứ tự các phương thức trong vòng đời của `Fragment`.
+
+### Tóm tắt
+
+Hiểu rõ vòng đời `Fragment` sẽ giúp quản lý tài nguyên tốt hơn và tránh các lỗi về giao diện hoặc dữ liệu khi `Fragment` bị tạo lại hoặc hủy.
 
 Với các bước trên, bạn đã tích hợp thành công Fragment vào Android project trong Java. 
 
